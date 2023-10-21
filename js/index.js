@@ -1,7 +1,5 @@
 const canvas = document.getElementById("maze-map");
-const ctx = canvas.getContext("2d");
-canvas.width = 400
-canvas.height = 400
+
 
 var cols, rows;
 var w = 40;
@@ -11,6 +9,8 @@ var current;
 var stack = [];
 
 function setup() {
+    canvas.width = 400
+    canvas.height = 400
     cols = Math.floor(canvas.width/w);
     rows = Math.floor(canvas.height/w);
 
@@ -24,7 +24,10 @@ function setup() {
 }
 
 function draw() {
-
+    const ctx = canvas.getContext("2d");
+    canvas.width = 400
+    canvas.height = 400
+    ctx.clearRect(0, 0, 400, 400)
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     current.visited = true;
@@ -43,9 +46,13 @@ function draw() {
         grid[i].show();
         current.highlight();  
     }
-    window.requestAnimationFrame(draw);  
+    update()
+    // window.requestAnimationFrame(draw);
 }
 
+function update() {
+    ctx = canvas.getContext("2d");
+}
 
 
 function index(i, j) {
@@ -57,6 +64,9 @@ function index(i, j) {
 }
 
 function Cell(i, j) {
+    const ctx = canvas.getContext("2d");
+    canvas.width = 400
+    canvas.height = 400
     this.i = i;
     this.j = j;
     this.walls = [true, true, true, true];
@@ -161,5 +171,6 @@ function removeWalls(a, b) {
 }
 
 setup();
-window.requestAnimationFrame(draw);
+// window.requestAnimationFrame(draw);
+setInterval(draw, 200);
 
